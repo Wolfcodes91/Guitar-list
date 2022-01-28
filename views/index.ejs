@@ -6,5 +6,29 @@
   </head>
   <body>
     <h1>Guitar List</h1>
+    <% if (guitars.length === 0) { %>
+      <p>There are no Guitars in this List</p>
+    <% } %>
+    <ul>
+    <% guitars.forEach((guitar, idx) => { %>
+        <li>
+          <%= guitar.brand %>
+          <%= guitar.model %>
+          -
+          <%= guitars.inTune ? 'Yes' : 'No' %>
+          <form action="/guitars/<%= idx %>?_method=DELETE" method="POST">
+            <button class="button1" type="submit">X</button>
+          </form>
+        </li>
+    <% }) %>
+    </ul>
+
+    <form action="/guitars" method="POST">
+      <label>Brand: </label>
+      <input type="text" name="brand">
+      <label>Model: </label>
+      <input type="text" name="model">
+     <button class="button2" type="submit">Add Guitar</button>
+    </form>
   </body>
 </html>
